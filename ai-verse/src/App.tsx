@@ -16,7 +16,12 @@ import CodeDebugger from "./components/features/CodeDebugger"
 import CodeExplainer from "./components/features/CodeExplainer"
 import CodeDocumentor from "./components/features/CodeDocumentor"
 import CodeReviewer from "./components/features/CodeReviewer"
-import AIInterviewer from "./components/features/AIInterviewer"
+import dynamic from 'next/dynamic';
+
+const AIInterviewer = dynamic(() => import('./components/features/AIInterviewer'), {
+  ssr: false,
+});
+
 import {
   Tooltip,
   TooltipContent,
