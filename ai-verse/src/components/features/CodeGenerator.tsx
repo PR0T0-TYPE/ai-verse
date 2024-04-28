@@ -2,12 +2,6 @@
 import { useState } from 'react';
 import { OpenAI } from "openai";
 import MarkdownPreview from '@uiw/react-markdown-preview';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import { Badge } from "@/components/ui/badge"
 import { CornerDownLeft, Loader2 } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -58,22 +52,22 @@ const CodeGenerator = () => {
         Output
       </Badge><br />
       <div className="flex-1">
-        <MarkdownPreview source={source} />
+        <MarkdownPreview source={source} style={{ padding:16}}  />
       </div><br />
 
       <form
-        className="sticky bottom-5 overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring " x-chunk="dashboard-03-chunk-1"
+        className="sticky bottom-5 overflow-hidden rounded-lg border bg-opacity-75 backdrop-blur-md focus-within:ring-1 focus-within:ring-ring " x-chunk="dashboard-03-chunk-1"
       >
         <Label htmlFor="message" className="sr-only">
           Message
         </Label>
-        <Textarea
+        <textarea
           id="message"
-          placeholder="Enter your problem statement..."
+          placeholder="Enter your problem statement..." // Paste your code here
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
-        />
+          className="min-h-12 resize border-0 bg-transparent p-3 shadow-none focus:outline-none focus:border-none w-full"  // Added w-full class
+        ></textarea>
         <div className="flex items-center p-3 pt-0 ">
           <Button type="submit" size="sm" className="ml-auto gap-1.5" onClick={handleGenerateCode} disabled={isLoading} >
             {isLoading ? (

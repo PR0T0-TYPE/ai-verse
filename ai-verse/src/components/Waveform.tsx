@@ -1,11 +1,15 @@
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
+import { useTheme } from './theme-provider';
 
 type WaveformProps = {
   fft: number[];
 };
 
 export const Waveform: FC<WaveformProps> = (props) => {
+  const { theme } = useTheme();
+
+  const fillColor = theme === 'dark' ? 'white' : 'black';
   const { fft } = props;
 
   return (
@@ -19,7 +23,7 @@ export const Waveform: FC<WaveformProps> = (props) => {
           <motion.rect
             className="transition-colors"
             key={index}
-            fill={'black'}
+            fill={fillColor}
             height={height}
             width={2}
             x={2 + (index * 100 - 4) / 24}

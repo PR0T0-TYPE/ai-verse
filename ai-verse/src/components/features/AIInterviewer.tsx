@@ -1,20 +1,15 @@
+import { Views } from '@/views/Views';
+import { VoiceProvider } from '@humeai/voice-react';
+import { AnimatePresence } from 'framer-motion';
+import {  useEffect, useState } from 'react';
+import '@/App.css';
+import { Frame } from '../Frame';
 import { fetchAccessToken } from '@humeai/voice';
-import dynamic from 'next/dynamic';
-import { FC, PropsWithChildren, useEffect, useState } from 'react';
-import Voice  from '@/components/Voice';
 
-const NoOp: FC<PropsWithChildren<Record<never, never>>> = ({ children }) => (
-  <>{children}</>
-);
 
-const NoSSR = dynamic(
-  () => new Promise<typeof NoOp>((resolve) => resolve(NoOp)),
-  { ssr: false },
-);
-
-export default function AIInterviewer() {
+function AIInterviewer() {
   const [accessToken, setAccessToken] = useState<string | null>(null);
-
+  
   useEffect(() => {
     const fetchToken = async () => {
       const token = await fetchAccessToken({
@@ -28,15 +23,36 @@ export default function AIInterviewer() {
   }, []);
 
   return (
-    <div className={'p-6'}>
-      <h1 className={'my-4 text-lg font-medium'}>AI-Interviewer</h1>
-      <NoSSR>
-        {accessToken ? (
-          <Voice accessToken={accessToken} />
-        ) : (
-          <div>Loading...</div>
-        )}
-      </NoSSR>
-    </div>
+    <>
+      <Frame >
+        <AnimatePresence mode={'wait'}>
+          {accessToken ? (
+            <VoiceProvider
+              auth={{ type: 'accessToken', value: accessToken }}
+              hostname={'api.hume.ai'}
+              messageHistoryLimit={10}
+              configId="fbef1c91-dfad-4af2-ac31-8fb96622d6a8"
+              onMessage={(message) => {
+                console.log('message', message);
+              }}
+              onClose={(event) => {
+                const niceClosure = 1000;
+                const code = event.code;
+                if (code !== niceClosure) {
+                  console.error('close event was not nice', event);
+                }
+              }}
+            >
+              <Views />
+            </VoiceProvider>
+          ) : (
+            <div>Loading...</div>
+          )}
+        </AnimatePresence>
+      </Frame>
+      
+    </>
   );
 }
+
+export default AIInterviewer;
