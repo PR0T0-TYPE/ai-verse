@@ -27,9 +27,9 @@ import CodeDocumentor from "./components/features/CodeDocumentor"
 import CodeReviewer from "./components/features/CodeReviewer"
 import dynamic from 'next/dynamic';
 
-const AIInterviewer = dynamic(() => import('./components/features/AIInterviewer'), {
-  ssr: false,
-});
+// const AIInterviewer = dynamic(() => import('./components/features/AIInterviewer'), {
+//   ssr: false,
+// });
 
 import {
   Tooltip,
@@ -37,11 +37,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import AIInterviewer from "./components/features/AIInterviewer"
 
 const App = () => {
   const [pageCount,setPageCount] = useState("0");
   const { setTheme }  = useTheme()
-  const [currentTheme,setCurrentTheme] = useState('');
+  const [currentTheme,setCurrentTheme] = useState('light');
 
   const home = () =>{
    setPageCount("0");
@@ -62,6 +63,8 @@ const App = () => {
     setPageCount("5");
   };
   const ai_Interviewer = () =>{
+    setCurrentTheme('light');
+    setTheme("light");
     setPageCount("6");
   };
 
@@ -221,6 +224,7 @@ const App = () => {
             <Share className="size-3.5" />
             Share
           </Button>
+          {pageCount !=='6' &&
           <DropdownMenu >
       <DropdownMenuTrigger asChild>
         <Button variant="ghost"  size="icon">
@@ -237,9 +241,9 @@ const App = () => {
           Dark
         </DropdownMenuItem>
       </DropdownMenuContent>
-    </DropdownMenu>
+    </DropdownMenu> }
           </header>
-          <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+          <main className="flex flex-1 flex-col  md:gap-8 md:p-8">
        {pageCount === "0" && 
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
         <Card x-chunk="dashboard-01-chunk-0" className="hover:bg-black hover:text-white transition-colors duration-300" onClick={codeGen} >

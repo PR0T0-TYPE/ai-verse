@@ -26,9 +26,9 @@ export const IntroScreen = ({
       transition={{ duration: 2 }}
     >
       <h2 className="text-center text-3xl">
-        <span>Meet EVI, our </span>
+        <span>Meet EVI, your </span>
         <CircledText>empathic</CircledText>
-        <span> AI voice</span>
+        <span> Voice Interviewer</span>
       </h2>
       <div className="w-fit">
         <motion.div
@@ -63,7 +63,7 @@ export const IntroScreen = ({
             isLoading={isConnecting}
             loadingText={'Connecting...'}
           >
-            Start Conversation
+            Start Interview
           </Button>
         </motion.div>
       </div>

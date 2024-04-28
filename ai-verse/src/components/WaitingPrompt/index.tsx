@@ -4,11 +4,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 const prompts = [
-  "What is Hume's mission?",
-  'Where can I learn more about EVI?',
-  'Show me more about the Hume team',
-  'How do you define well-being?',
-  "Help me learn about Hume's APIs",
+  "Be calm and listen carefully",
+  'Ask for clarification',
+  'Provide structured responses',
+  'Mention relevant expertise',
+  "All The Best !",
 ];
 
 export const WaitingPrompt = () => {
@@ -39,7 +39,7 @@ export const WaitingPrompt = () => {
           isShortFrame && 'pt-4',
         )}
       >
-        Try saying...
+        Hello There...
       </div>
       <motion.div
         initial={{ opacity: 0 }}
