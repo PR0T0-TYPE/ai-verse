@@ -1,5 +1,6 @@
 # ai-verse
 # Tech Stack 
+ - Vite
  - Typescript
  - React
  - Tailwind CSS
